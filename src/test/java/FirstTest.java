@@ -1,31 +1,36 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class FirstTest {
+
     @Test
     public void checkZipCodeInput() {
         WebDriver browser = new SafariDriver();
-        browser.get("https://www.sharelane.com/cgi-bin/register.py?page=1&zip_code=1234");
-        browser.findElement(By.cssSelector("[name = 'Zip_code']")).sendKeys("1234");
+        browser.get("https://www.sharelane.com/cgi-bin/register.py");
+        browser.findElement(By.cssSelector("[name = 'zip_code']")).sendKeys("1234");
         browser.findElement(By.cssSelector("[value='Continue']")).click();
+
         boolean IsErrorAppear = browser.findElement(By.cssSelector(".error_message")).isDisplayed();
         assertTrue(IsErrorAppear, "Error message does not appear");
+
         String errorMessageText = browser.findElement(By.cssSelector(".error_message")).getText();
         assertEquals(errorMessageText, "Oops, error on page. ZIP code should have 5 digits");
+    }
 
+    @Test
+    public void checkZipCodeFiveDigitInput() {
+        WebDriver browser = new SafariDriver();
+        browser.get("https://www.sharelane.com/cgi-bin/register.py");
+        browser.findElement(By.cssSelector("[name = 'zip_code']")).sendKeys("12345");
+        browser.findElement(By.cssSelector("[value='Continue']")).click();
 
-
-       /* browser.findElement(By.cssSelector("[name = 'Zip_code']")).sendKeys(Keys.COMMAND + "A");
-        browser.findElement(By.cssSelector("[name = 'Zip_code']")).sendKeys(Keys.DELETE);
-        /* browser.findElement(By.xpath("//*[name = 'Zip_code']"));
-        browser.findElement(By.name("Zip_code"));
-
-        */
+        boolean IsRegisterBthExist = browser.findElement(By.cssSelector("value='Register")).isDisplayed();
+        assertTrue(IsRegisterBthExist, "Register bth is not visible");
     }
 }
 
