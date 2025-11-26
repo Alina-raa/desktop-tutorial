@@ -1,14 +1,14 @@
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import pagest.LoginPage;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
     @Test
-    public void checkIncorrectLogin() throws InterruptedException {
+    public void checkIncorrectLogin() {
         loginPage.open();
-        loginPage.login("locked_out_user", "secret_sauce");
+        loginPage.login("Locked_out_user", "secret_sauce");
         assertTrue(loginPage.IsErrorAppear(), "Error message does not appear");
         assertEquals(loginPage.ErrorMessageText(), "Epic sadface: Sorry, this user has been locked out.");
     }

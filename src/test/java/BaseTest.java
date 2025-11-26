@@ -14,9 +14,9 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
+        //options.merge("--guest");
         options.addArguments("start-maximized");
-        //options.addArgument("--windows-size=1920,1080");
-        //options.addArgument("--guest");
+        //options.merge("--windows-size=1920,1080");
         // options.addArgument("headless");
 
         driver = new ChromeDriver();
