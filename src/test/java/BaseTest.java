@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import pagest.LoginPage;
 import pagest.ProductsPage;
 
+import java.time.Duration;
+
 public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
@@ -14,12 +16,13 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
-        //options.merge("--guest");
-        options.addArguments("start-maximized");
-        //options.merge("--windows-size=1920,1080");
-        // options.addArgument("headless");
+        options.addArguments("--windows-size=1920,1080");
+        options.addArguments("--guest");
+        //options.addArguments("start-maximized");
+        //options.addArgument("headless");
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
 
@@ -27,5 +30,6 @@ public class BaseTest {
 
     @AfterMethod
     public void close() {
+        driver.quit();
     }
 }

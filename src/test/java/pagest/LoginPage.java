@@ -3,8 +3,7 @@ package pagest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    WebDriver driver;
+public class LoginPage extends BasePage {
 
     By userField = By.cssSelector("[placeholder='Username']");
     By passwordField = By.cssSelector("[placeholder='Password']");
@@ -12,24 +11,24 @@ public class LoginPage {
     By error = By.xpath("//*[@data-test='error']");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void open() {
-        driver.get("https://www.saucedemo.com");
+        driver.get(BASE_URL);
     }
 
     public void login(final String userName, final String passwordName) {
-        driver.findElement(userField).sendKeys("standard_user");
-        driver.findElement(passwordField).sendKeys("secret_sauce");
+        driver.findElement(userField).sendKeys(userName);
+        driver.findElement(passwordField).sendKeys(passwordName);
         driver.findElement(loginBtn).click();
     }
 
-    public boolean IsErrorAppear() {
+    public boolean isErrorMsgAppear() {
         return driver.findElement(error).isDisplayed();
     }
 
-    public String ErrorMessageText() {
+    public String errorMessageText() {
         return driver.findElement(error).getText();
     }
 }
