@@ -10,7 +10,7 @@ public class ProductsTest extends BaseTest {
         productsPage.isPageLoaded("Products");
         productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
         productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-        productsPage.addToCart(3);
-        assertEquals(productsPage.checkGoodsQuantity(), "1");
+        productsPage.addToCart(1);
+        assertEquals(productsPage.checkGoodsQuantity(), "3");
     }
 }

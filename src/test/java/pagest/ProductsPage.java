@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductsPage extends BasePage {
-    //By pageTitle = By.xpath("//*[@data-test='title']");
-
+    By pageTitle = By.xpath("//*[@data-test='title']");
     private static final String ADD_TO_CART_BUTTON_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
     //private static final String DATA_TEST_PATTERN = "[data-test='%s']";
 
@@ -32,5 +31,9 @@ public class ProductsPage extends BasePage {
 
     public String checkGoodsQuantity() {
         return driver.findElement(cartBadge).getText();
+    }
+
+    public void switchToCart() {
+        driver.findElement(cartBadge).click();
     }
 }
