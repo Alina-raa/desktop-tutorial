@@ -20,7 +20,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--windows-size=1920,1080");
         options.addArguments("--guest");
-        //options.addArguments("start-maximized");
+        // options.addArguments("start-maximized");
         //options.addArgument("headless");
 
         driver = new ChromeDriver(options);
