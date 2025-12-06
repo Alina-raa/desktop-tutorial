@@ -1,32 +1,36 @@
+package tests;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static user.UserFactory.wiseAdminPermission;
+import static user.UserFactory.wiseLockedUserPermission;
 
 public class LoginTest extends BaseTest {
     @DataProvider(name = "invalidData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
-                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {locked, password, "Epic sadface: Sorry, this user has been locked out."},
+                {"", password, "Epic sadface: Username is required"},
                 {"standard_user", "", "Epic sadface: Password is required"},
-                {"Locked_out_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"}
+                {"Locked_out_user", password, "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 
-    @Test(description = "Проверка корректного логина", dataProvider = "invalidData")
-    public void checkIncorrectLogin(String user, String password, String errorMsg) {
+    @Test
+    public void checkIncorrectLogin(){
         loginPage.open();
-        loginPage.login(user, password);
+        loginPage.login(wiseLockedUserPermission());
         assertTrue(loginPage.isErrorMsgAppear(), "Error message does not appear");
-        assertEquals(loginPage.errorMessageText(), errorMsg);
+        assertEquals(loginPage.errorMessageText(), "Epic sadface: Sorry, this user has been locked out.");
     }
 
     @Test(description = "Некорректный логин")
     public void checkCorrectLogin() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(wiseAdminPermission());
         assertTrue(productsPage.isPageLoaded("Products"), "Register bth is not visible");
     }
 }
