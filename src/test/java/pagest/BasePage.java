@@ -1,5 +1,6 @@
 package pagest;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,6 +18,8 @@ public class BasePage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
+
+    @Step("Ждем прогрузки страницы")
     public boolean isPageLoaded(final String pageTitle) {
         // wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle));
         return driver.findElement(By.xpath(TEXT_LOCATOR_PATTERN.formatted(pageTitle))).isDisplayed();
