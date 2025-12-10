@@ -1,34 +1,38 @@
 package pagest;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+/*Данная страница описывает функционал витрины*/
 public class ProductsPage extends BasePage {
-    By pageTitle = By.xpath("//*[@data-test='title']");
     private static final String ADD_TO_CART_BUTTON_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
-    //private static final String DATA_TEST_PATTERN = "[data-test='%s']";
-
+    By pageTitle = By.xpath("//*[@data-test='title']");
     By cartBadge = By.xpath("//*[@data-test='shopping-cart-badge']");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
+    @Step("Загрузка страницы")
     public boolean isPageLoaded(final String pageTitle) {
         //wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle));
         return driver.findElement(By.xpath(TEXT_LOCATOR_PATTERN.formatted(pageTitle))).isDisplayed();
     }
 
+    @Step("Добавляем товар в корзину по названию")
     public void addToCart(final String goodsName) {
         //By addGoodsToCart = By.xpath(String.format(ADD_TO_CART_BUTTON_PATTERN, "Sauce Labs Bike Light"));
         By addGoodsToCart = By.xpath(ADD_TO_CART_BUTTON_PATTERN.formatted(goodsName));
         driver.findElement(addGoodsToCart).click();
     }
 
+    @Step("Добавляем товар в корзину")
     public void addToCart(final int goodsOrder) {
         driver.findElements(By.xpath(TEXT_LOCATOR_PATTERN.formatted("Add to cart"))).get(goodsOrder).click();
     }
 
+    @Step("Отображение наименования товара")
     public String checkGoodsQuantity() {
         return driver.findElement(cartBadge).getText();
     }
