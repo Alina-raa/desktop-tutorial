@@ -15,6 +15,7 @@ import utils.PropertyReader;
 import utils.TestListener;
 
 import java.time.Duration;
+
 @Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
 
@@ -23,11 +24,7 @@ public class BaseTest {
     ProductsPage productsPage;
     CartPage cartPage;
     String user;
-    String locked;
     String password;
-    String inCorlocked_user;
-    String zero_user;
-    String zero_password;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -53,14 +50,7 @@ public class BaseTest {
         cartPage = new CartPage(driver);
 
         user = PropertyReader.getProperty("sausedemo.user");
-        locked = PropertyReader.getProperty("sausedemo.locked_user");
         password = PropertyReader.getProperty("sausedemo.password");
-        inCorlocked_user =PropertyReader.getProperty("sausedemo.inCorlocked_user");
-        zero_user = PropertyReader.getProperty("sausedemo.zero_user");
-        zero_password =PropertyReader.getProperty("sausedemo.zero_password");
-
-
-
     }
 
     @AfterMethod

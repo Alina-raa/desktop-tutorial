@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import user.User;
 
 public class LoginPage extends BasePage {
-
     By userField = By.cssSelector("[placeholder='Username']");
     By passwordField = By.cssSelector("[placeholder='Password']");
     By loginBtn = By.id("login-button");
@@ -38,9 +37,9 @@ public class LoginPage extends BasePage {
         return driver.findElement(error).getText();
     }
 
-   /* public void login(String user, String password) {
+   public void login(String user, String password) {
         driver.findElement(userField).sendKeys(user);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(loginBtn).click();
-    }*/
+    }
 }
