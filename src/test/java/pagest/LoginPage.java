@@ -16,15 +16,17 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Открытие страницы")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
-  @Step("Авторизация под кредами пользователя: логин={user.email} пароль = ****")
-    public void login(User user) {
+    @Step("Авторизация под кредами пользователя: логин={user.email} пароль = ****")
+    public LoginPage login(User user) {
         driver.findElement(userField).sendKeys(user.getEmail());
         driver.findElement(passwordField).sendKeys(user.getPassword());
         driver.findElement(loginBtn).click();
+        return this;
     }
 
     @Step("Отображение сообщения об ошибке")
@@ -37,9 +39,10 @@ public class LoginPage extends BasePage {
         return driver.findElement(error).getText();
     }
 
-   public void login(String user, String password) {
+    public LoginPage login(String user, String password) {
         driver.findElement(userField).sendKeys(user);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(loginBtn).click();
+        return this;
     }
 }

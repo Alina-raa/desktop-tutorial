@@ -17,21 +17,22 @@ public class LoginTest extends BaseTest {
                 {wiseLockedUserPermission(), "Epic sadface: Sorry, this user has been locked out."},
                 {wiseZeroUserPermission(), "Epic sadface: Username is required"},
                 {wiseZeroPassPermission(), "Epic sadface: Password is required"},
-                {wiseinCorlockedUserPermission(),"Epic sadface: Username and password do not match any user in this service"}
+                {wiseinCorlockedUserPermission(), "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 
     @Epic("Создание лида")
     @Feature("Создание карточки клиента")
-    @Story("Пангинация")
+    @Story("Пагинация")
     @TmsLink("desktop-tutorial")
     @Severity(SeverityLevel.BLOCKER)
     @Owner("Ryabova Alina alinessar@gmail.com")
     @Issue("desktop-tutorial")
     @Test(description = "Проверка некорректного логина", dataProvider = "invalidData")
-    public void checkIncorrectLogin(User user,String err) {
-        loginPage.open();
-        loginPage.login(user);
+    public void checkIncorrectLogin(User user, String err) {
+        loginPage
+                .open()
+                .login(user);
         //AllureUtils.takeScreenshot(driver);
         assertTrue(loginPage.isErrorMsgAppear(), "Error message does not appear");
         assertEquals(loginPage.errorMessageText(), err);
@@ -40,8 +41,9 @@ public class LoginTest extends BaseTest {
     @TmsLink("desktop-tutorial")
     @Test(description = "Проверка корректного логина")
     public void checkCorrectLogin() {
-        loginPage.open();
-        loginPage.login(wiseAdminPermission());
+        loginPage
+                .open()
+                .login(wiseAdminPermission());
         assertTrue(productsPage.isPageLoaded(PRODUCTS.getDisplayName()), "Register bth is not visible");
     }
 }
