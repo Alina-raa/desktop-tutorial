@@ -12,6 +12,12 @@
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>4.32.0</selenium.version>
+        <testng.version>7.10.2</testng.version>
+        <aspectj.version> 1.9.24</aspectj.version>
+        <projectlombok.version> 1.18.42</projectlombok.version>
+        <webdrivermanager.version> 6.3.3</webdrivermanager.version>
+        <allure.version> 2.29.1</allure.version>
     </properties>
 
  <dependencies>
@@ -19,34 +25,34 @@
      <dependency>
          <groupId>org.seleniumhq.selenium</groupId>
          <artifactId>selenium-java</artifactId>
-         <version>4.32.0</version>
+         <version>${selenium.version}</version>
      </dependency>
 
      <dependency>
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
-         <version>7.10.2</version>
+         <version>${testng.version}</version>
      </dependency>
      <dependency>
          <groupId>io.github.bonigarcia</groupId>
          <artifactId>webdrivermanager</artifactId>
-         <version>6.3.3</version>
+         <version>${webdrivermanager.version}</version>
      </dependency>
      <dependency>
          <groupId>io.qameta.allure</groupId>
          <artifactId>allure-testng</artifactId>
-         <version>2.29.1</version>
+         <version>${allure.version}</version>
          <scope>test</scope>
      </dependency>
      <dependency>
          <groupId> org.aspectj</groupId>
          <artifactId> aspectjweaver</artifactId>
-         <version> 1.9.24</version>
+         <version>${aspectj.version}</version>
      </dependency>
      <dependency>
          <groupId>org.projectlombok</groupId>
          <artifactId>lombok</artifactId>
-         <version>1.18.42</version>
+         <version>${projectlombok.version}</version>
      </dependency>
 
  </dependencies>
@@ -58,7 +64,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <argLine>
-                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.24/aspectjweaver-1.9.24.jar -Xmx256m
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar -Xmx256m
                     </argLine>
                 </configuration>
             </plugin>

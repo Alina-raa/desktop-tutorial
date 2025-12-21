@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 /*Данная страница описывает функционал витрины*/
 public class ProductsPage extends BasePage {
     private static final String ADD_TO_CART_BUTTON_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
-    By pageTitle = By.xpath("//*[@data-test='title']");
     By cartBadge = By.xpath("//*[@data-test='shopping-cart-badge']");
 
     public ProductsPage(WebDriver driver) {
@@ -16,20 +15,20 @@ public class ProductsPage extends BasePage {
 
     @Step("Загрузка страницы")
     public boolean isPageLoaded(final String pageTitle) {
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle));
         return driver.findElement(By.xpath(TEXT_LOCATOR_PATTERN.formatted(pageTitle))).isDisplayed();
     }
 
     @Step("Добавляем товар в корзину по названию")
-    public void addToCart(final String goodsName) {
-        //By addGoodsToCart = By.xpath(String.format(ADD_TO_CART_BUTTON_PATTERN, "Sauce Labs Bike Light"));
+    public ProductsPage addToCart(final String goodsName) {
         By addGoodsToCart = By.xpath(ADD_TO_CART_BUTTON_PATTERN.formatted(goodsName));
         driver.findElement(addGoodsToCart).click();
+        return this;
     }
 
     @Step("Добавляем товар в корзину")
-    public void addToCart(final int goodsOrder) {
+    public ProductsPage addToCart(final int goodsOrder) {
         driver.findElements(By.xpath(TEXT_LOCATOR_PATTERN.formatted("Add to cart"))).get(goodsOrder).click();
+        return this;
     }
 
     @Step("Отображение наименования товара")

@@ -8,9 +8,11 @@ import static user.UserFactory.wiseAdminPermission;
 public class CartTest extends BaseTest {
     @Test
     public void checkGoodsInCart() {
-        loginPage.open();
-        loginPage.login(wiseAdminPermission());
-        productsPage.isPageLoaded("Products");
+        loginPage
+                .open()
+                .login(wiseAdminPermission());
+        productsPage
+                .isPageLoaded("Products");
         productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
         productsPage.addToCart("Sauce Labs Bolt T-Shirt");
         productsPage.switchToCart();

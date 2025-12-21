@@ -8,12 +8,15 @@ import static user.UserFactory.wiseAdminPermission;
 public class ProductsTest extends BaseTest {
     @Test
     public void checkGoodsAdded() {
-        loginPage.open();
-        loginPage.login(wiseAdminPermission());
-        productsPage.isPageLoaded("Products");
-        productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
-        productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-        productsPage.addToCart(1);
+        loginPage
+                .open()
+                .login(wiseAdminPermission());
+        productsPage
+                .isPageLoaded("Products");
+        productsPage
+                .addToCart("Test.allTheThings() T-Shirt (Red)")
+                .addToCart("Sauce Labs Bolt T-Shirt")
+                .addToCart(1);
         assertEquals(productsPage.checkGoodsQuantity(), "3");
     }
 }
